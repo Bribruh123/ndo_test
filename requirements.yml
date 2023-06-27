@@ -3,3 +3,5 @@ collections:
 
 - name: cisco.mso
   version: "2.2.1"
+
+- name: cisco.nd
