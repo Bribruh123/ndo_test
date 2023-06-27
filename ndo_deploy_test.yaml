@@ -6,7 +6,7 @@
   # Login to APIC
   vars:
     login_info: &login_info
-      host: "172.31.1.20"
+      host: "{{ ansible_host }}"
       username: "admin"
       password: "C1sc0TTG!"
       validate_certs: False
