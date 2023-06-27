@@ -1,6 +1,6 @@
 ---
 - name: Test Deploy
-  hosts: "*"
+  hosts: "{{ ansible_host }}"
   gather_facts: false
 
   # Login to APIC
