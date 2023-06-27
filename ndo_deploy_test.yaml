@@ -1,0 +1,72 @@
+---
+- name: Test Deploy
+  hosts: "*"
+  gather_facts: false
+
+  # Login to APIC
+  vars:
+    login_info: &login_info
+      host: "172.31.1.20"
+      username: "admin"
+      password: "C1sc0TTG!"
+      validate_certs: False
+      login_domain: "local"
+
+  tasks:
+
+  # - name: Get MSO version
+  #   cisco.mso.mso_version:
+  #     <<: *login_info
+  #     state: query
+  #   register: query_result
+
+  # - name: Query all schemas
+  #   cisco.mso.mso_tenant:
+  #     <<: *login_info
+  #     state: query
+  #   register: query_result
+
+  # # - name: Bind EEPG to L3OUT for az1
+  # #   cisco.mso.mso_schema_site_external_epg:
+  # #     <<: *login_info
+  # #     schema: "brhoch_test"
+  # #     template: "Template1"
+  # #     l3out: "L3Out 1"
+  # #     external_epg: "External EPG 1"
+  # #     site: "Pod1-Site1-ND"
+
+  # - name: Post EEPG
+  #   cisco.mso.mso_schema_template_external_epg:
+  #     validate_certs: false
+  #     <<: *login_info
+  #     schema: "brhoch_test"
+  #     template: "Template1"
+  #     external_epg: "EEPG_test"
+  #     vrf:
+  #       name: "vrf_test"
+  #       schema: "brhoch_test"
+  #       template: "TemplateGlobal"
+  #     l3out:
+  #       name: "l3out_test"
+  #       schema: "brhoch_test"
+  #       template: "Template1"
+  #     state: present
+
+
+  # - name: Deploy a schema template
+  #   cisco.mso.ndo_schema_template_deploy:
+  #     <<: *login_info
+  #     schema: "brhoch_test"
+  #     template: "Template1"
+  #     state: redeploy
+  #   # delegate_to: localhost
+
+
+  - name: Deploy a schema template
+    cisco.mso.ndo_schema_template_deploy:
+      <<: *login_info
+      schema: "brhoch_test"
+      template: "TemplateGlobal"
+      output_level: "debug"
+      state: redeploy
+    # delegate_to: localhost
